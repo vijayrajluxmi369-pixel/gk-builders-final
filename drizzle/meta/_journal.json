@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1774447777829,
+      "tag": "0000_lame_colleen_wing",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1774526685825,
+      "tag": "0001_aberrant_black_bolt",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1774600091592,
+      "tag": "0002_productive_surge",
+      "breakpoints": true
+    }
+  ]
+}

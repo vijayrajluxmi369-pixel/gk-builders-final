@@ -1,0 +1,144 @@
+================================================================================
+MANUS ENVIRONMENT VARIABLES - COPY TO VERCEL
+================================================================================
+
+ये सब variables आपके Manus project में automatically available हैं।
+इन्हें Vercel में add करो:
+
+Vercel Dashboard → Settings → Environment Variables → Add New
+
+================================================================================
+MOST IMPORTANT (जरूरी):
+================================================================================
+
+1. DATABASE_URL
+   Description: MySQL database connection string
+   Where to find: Manus Dashboard → Settings → Database
+   Format: mysql://user:password@host:3306/database_name
+   Status: ⭐ CRITICAL - Website काम नहीं करेगी बिना इसके
+
+2. JWT_SECRET
+   Description: Secret key for session signing
+   Where to find: Generate करो या Manus से copy करो
+   Format: कोई भी 32+ character random string
+   Generate करने के लिए: openssl rand -base64 32
+   Status: ⭐ CRITICAL - Login काम नहीं करेगा बिना इसके
+
+================================================================================
+MANUS OAUTH VARIABLES (Login के लिए जरूरी):
+================================================================================
+
+3. VITE_APP_ID
+   Description: Manus OAuth application ID
+   Where to find: Manus Dashboard → Settings → Secrets
+   Status: ✅ REQUIRED - Login के लिए
+
+4. VITE_OAUTH_PORTAL_URL
+   Description: Manus login portal URL
+   Where to find: Manus Dashboard → Settings → Secrets
+   Status: ✅ REQUIRED - Login के लिए
+
+5. OAUTH_SERVER_URL
+   Description: Manus OAuth server base URL
+   Where to find: Manus Dashboard → Settings → Secrets
+   Status: ✅ REQUIRED - Login के लिए
+
+6. VITE_FRONTEND_FORGE_API_KEY
+   Description: Frontend API key for Manus built-in services
+   Where to find: Manus Dashboard → Settings → Secrets
+   Status: ⚠️ RECOMMENDED
+
+7. VITE_FRONTEND_FORGE_API_URL
+   Description: Frontend API URL for Manus services
+   Where to find: Manus Dashboard → Settings → Secrets
+   Status: ⚠️ RECOMMENDED
+
+================================================================================
+STRIPE VARIABLES (Payment के लिए - Optional):
+================================================================================
+
+8. STRIPE_SECRET_KEY
+   Description: Stripe secret key for backend payments
+   Where to find: Stripe Dashboard → API Keys → Secret Key
+   Status: ⚠️ OPTIONAL (सिर्फ अगर payment चाहिए)
+
+9. VITE_STRIPE_PUBLISHABLE_KEY
+   Description: Stripe publishable key for frontend
+   Where to find: Stripe Dashboard → API Keys → Publishable Key
+   Status: ⚠️ OPTIONAL (सिर्फ अगर payment चाहिए)
+
+================================================================================
+STEP-BY-STEP GUIDE:
+================================================================================
+
+STEP 1: Manus Dashboard से Variables Copy करो
+   1. https://app.manus.im खोलो
+   2. अपना project select करो: gk-builders
+   3. Settings → Secrets खोलो
+   4. ये variables copy करो:
+      - VITE_APP_ID
+      - VITE_OAUTH_PORTAL_URL
+      - OAUTH_SERVER_URL
+      - VITE_FRONTEND_FORGE_API_KEY
+      - VITE_FRONTEND_FORGE_API_URL
+
+STEP 2: Database URL Generate करो
+   Option A: PlanetScale से (Free MySQL)
+      1. https://www.planetscale.com खोलो
+      2. GitHub से sign up करो
+      3. नया database create करो
+      4. Connect button दबाओ
+      5. Node.js select करो
+      6. Connection string copy करो
+   
+   Option B: अगर पहले से database है तो उसका URL use करो
+
+STEP 3: JWT_SECRET Generate करो
+   Terminal में ये command चलाओ:
+   openssl rand -base64 32
+   
+   या यहाँ से copy करो:
+   a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2
+
+STEP 4: Vercel में Add करो
+   1. https://vercel.com/dashboard खोलो
+   2. अपना project select करो
+   3. Settings tab खोलो
+   4. Environment Variables खोलो
+   5. "Add New" दबाओ
+   6. ये सब add करो:
+      
+      DATABASE_URL = (PlanetScale से copy किया हुआ)
+      JWT_SECRET = (Generate किया हुआ)
+      VITE_APP_ID = (Manus से copy किया हुआ)
+      VITE_OAUTH_PORTAL_URL = (Manus से copy किया हुआ)
+      OAUTH_SERVER_URL = (Manus से copy किया हुआ)
+      VITE_FRONTEND_FORGE_API_KEY = (Manus से copy किया हुआ)
+      VITE_FRONTEND_FORGE_API_URL = (Manus से copy किया हुआ)
+
+STEP 5: Redeploy करो
+   1. Deployments tab खोलो
+   2. Latest failed deployment पर click करो
+   3. "Redeploy" button दबाओ
+   4. Build logs देखो (2-5 minutes लगेंगे)
+
+================================================================================
+IMPORTANT NOTES:
+================================================================================
+
+⚠️ कभी भी ये variables commit मत करो GitHub में!
+⚠️ सिर्फ Vercel में add करो
+⚠️ Production के लिए हमेशा secure values use करो
+⚠️ API keys को किसी से share मत करो
+
+================================================================================
+TROUBLESHOOTING:
+================================================================================
+
+अगर build fail हो तो:
+1. सब variables सही से add हैं की नहीं check करो
+2. DATABASE_URL format सही है की नहीं check करो
+3. JWT_SECRET empty तो नहीं है check करो
+4. Vercel logs में exact error देखो
+
+================================================================================
